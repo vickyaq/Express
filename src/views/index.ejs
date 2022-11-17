@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('partials/head', {title: 'Inicio'}) %>
+<body>
+	<!-- Header -->
+	<%- include('partials/headerNavbar') %>
+	<!-- /Header -->
+	
+	<!-- Banner -->
+	<div class="banner"></div>
+	<!-- /Banner -->
+
+	<!-- ultima visita -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Basado en tu última visita</h2>
+			</div>
+			<!-- Show the "visited" products -->
+			<div class="flex-container">
+				<% visitedProducts.forEach(visitedProduct => { %>
+
+					<article class="product-box">
+						<a href="/products/detail/<%=visitedProduct.id%>">
+							<figure class="product-box_image">
+								<img src="/images/products/<%=visitedProduct.image%>" alt="imagen de producto">
+							</figure>
+							<section class="product-box_data">
+								<h2> $<%= visitedProduct.price * (1 - visitedProduct.discount / 100) %> </h2>
+								<% if (visitedProduct.discount > 0) { %>
+									<span> <%=visitedProduct.discount %> % OFF</span>
+								<% } %>
+								<p> <%=visitedProduct.name%> </p>
+								<i class="fas fa-truck"></i>
+							</section>
+						</a>
+					</article>
+
+					<% }) %>
+				
+			</div>
+		</div>
+	</div>
+	<!-- /ultima visita -->
+
+	<!-- Ofertas -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Ofertas</h2>
+			</div>
+			<!-- Show the "in-sale" products -->
+			<div class="col-12 col-sm-6 col-lg-3">
+				<section class="flex-products-box">
+
+					<% inSaleProducts.forEach(inSaleProduct => { %>
+
+						<article class="product-box">
+							<a href="/products/detail/<%=inSaleProduct.id%>">
+								<figure class="product-box_image">
+									<img src="/images/products/<%=inSaleProduct.image%>" alt="imagen de producto">
+								</figure>
+								<section class="product-box_data">
+									<h2> $<%= inSaleProduct.price * (1 - inSaleProduct.discount / 100) %> </h2>
+									<% if (inSaleProduct.discount > 0) { %>
+										<span> <%=inSaleProduct.discount %> % OFF</span>
+									<% } %>
+									<p> <%=inSaleProduct.name%> </p>
+									<i class="fas fa-truck"></i>
+								</section>
+							</a>
+						</article>
+	
+						<% }) %>
+
+				
+				</section>
+			</div>
+		</div>
+	</div>
+	<!-- /Ofertas -->
+
+	<!-- footer -->
+	<%- include('partials/footer') %>
+	<!-- /footer -->
+</body>	
+</html>
